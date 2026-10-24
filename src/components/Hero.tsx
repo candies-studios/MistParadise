@@ -3,6 +3,9 @@ import { ChevronDown, MapPin } from 'lucide-react';
 import { IMAGES } from '@/data/content';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
 
+const HERO_VIDEO = `${import.meta.env.BASE_URL}video/hero-landscape.mp4`;
+const HERO_POSTER = `${import.meta.env.BASE_URL}video/hero-poster.jpg`;
+
 export function Hero() {
   const scrollY = useScrollPosition();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -58,11 +61,23 @@ export function Hero() {
         className="absolute inset-0 will-change-transform"
         style={{ transform: `${px(6)} ${scrollParallax(0.15)}` }}
       >
+        {/* Landscape resort film; visitors who prefer reduced motion get the still photo instead */}
+        <video
+          src={HERO_VIDEO}
+          poster={HERO_POSTER}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-label="Walkthrough of Mist Paradise: garden paths, gazebo, rooms and the cottages at night"
+          className="w-full h-full object-cover opacity-80 animate-fade-in motion-reduce:hidden"
+          style={{ animationDelay: '0.3s' }}
+        />
         <img
           src={IMAGES.heroPool}
-          alt="Luxury resort pool with mountains"
-          className="w-full h-full object-cover opacity-70 animate-fade-in"
-          style={{ animationDelay: '0.5s' }}
+          alt="Resort pool at Mist Paradise"
+          className="hidden motion-reduce:block w-full h-full object-cover opacity-70"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/30 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink-950/60 via-transparent to-ink-950/40" />
