@@ -13,7 +13,7 @@ cp .env.example .env      # then fill in your Supabase URL and anon key
 npm run dev               # http://localhost:5173
 ```
 
-Other scripts: `npm run build` (production build into `dist/`), `npm run preview`,
+Other scripts: `npm run build` (production build into `docs/`), `npm run preview`,
 `npm run lint`, `npm run typecheck`.
 
 ## Environment variables
@@ -28,19 +28,19 @@ provider's settings instead.
 
 ## Deploy
 
-### GitHub Pages (set up already)
+### GitHub Pages
 
-`.github/workflows/deploy.yml` builds the site and publishes it on every push to `main`.
-One-time setup: repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-Then push, open the **Actions** tab, and wait for "Deploy to GitHub Pages" to go green (about 1–2 minutes).
+The ready-built site is in `docs/`. GitHub Pages serves it directly, with no build step on GitHub:
 
-Optional: to save enquiries to Supabase, add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
-under **Settings → Secrets and variables → Actions**, then re-run the workflow. Without them the site
-works normally and the enquiry form opens WhatsApp with the visitor's details.
+**Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: `main`, folder: `/docs` → Save.**
+
+After changing anything in `src/`, run `npm run build` (which rewrites `docs/`) and push again.
+To save enquiries to Supabase, create a `.env` from `.env.example` before building.
+Without it, the site works normally and the enquiry form opens WhatsApp with the visitor's details.
 
 ### Netlify / Vercel / Cloudflare Pages
 
-Import this repo, build command `npm run build`, output directory `dist`, and add the two
+Import this repo, build command `npm run build`, output directory `docs`, and add the two
 environment variables above.
 
 ## Database (Supabase)
