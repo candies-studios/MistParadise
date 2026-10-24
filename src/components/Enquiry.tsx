@@ -59,7 +59,7 @@ export function Enquiry() {
         guests: '',
         message: '',
       });
-    } catch (err) {
+    } catch {
       setStatus('error');
     }
   };
@@ -77,7 +77,7 @@ export function Enquiry() {
           </h2>
           <p className="mt-4 text-ink-300/70 leading-relaxed">
             We'll reply with availability and current rates. Prefer to talk? Call{' '}
-            <span className="text-gold-300">+91 98765 43210</span>.
+            <span className="text-gold-300">+91 88791 61429</span>.
           </p>
           <p className="mt-2 text-xs text-ink-400/60">
             We use these details only to reply to your enquiry. An enquiry is not a confirmed booking.

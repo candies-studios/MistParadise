@@ -70,11 +70,11 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+918879161429"
                   className="flex items-center gap-2.5 text-sm text-ink-300/70 hover:text-gold-300 transition-colors"
                 >
                   <Phone className="w-4 h-4 text-mist-300 shrink-0" />
-                  +91 98765 43210
+                  +91 88791 61429
                 </a>
               </li>
             </ul>

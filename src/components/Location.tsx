@@ -4,7 +4,7 @@ import { useReveal } from '@/hooks/useReveal';
 
 const ADDRESS = 'Vadavali Road · Kadav · Karjat, Maharashtra 410201';
 const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=Mist+Paradise+Karjat';
-const PHONE = '+91 98765 43210';
+const PHONE = '+91 88791 61429';
 
 export function Location() {
   const { ref, inView } = useReveal<HTMLDivElement>();

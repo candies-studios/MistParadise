@@ -1,4 +1,3 @@
-import { IMAGES } from '@/data/content';
 import { EXPERIENCES } from '@/data/content';
 import { useReveal } from '@/hooks/useReveal';
 
