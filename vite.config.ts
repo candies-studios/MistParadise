@@ -4,6 +4,9 @@ import { fileURLToPath, URL } from 'node:url';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // Relative base so the built site works from any folder,
+  // e.g. https://<user>.github.io/MistParadise/ as well as a root domain.
+  base: './',
   plugins: [react()],
   resolve: {
     alias: {

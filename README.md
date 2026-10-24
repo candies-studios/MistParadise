@@ -28,11 +28,20 @@ provider's settings instead.
 
 ## Deploy
 
-**Netlify / Vercel / Cloudflare Pages:** import this repo, build command `npm run build`,
-output directory `dist`, and add the two environment variables above.
+### GitHub Pages (set up already)
 
-**GitHub Pages** works too, but needs a GitHub Actions workflow that builds the site;
-Netlify or Vercel is simpler for a Vite app.
+`.github/workflows/deploy.yml` builds the site and publishes it on every push to `main`.
+One-time setup: repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+Then push, open the **Actions** tab, and wait for "Deploy to GitHub Pages" to go green (about 1–2 minutes).
+
+Optional: to save enquiries to Supabase, add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
+under **Settings → Secrets and variables → Actions**, then re-run the workflow. Without them the site
+works normally and the enquiry form opens WhatsApp with the visitor's details.
+
+### Netlify / Vercel / Cloudflare Pages
+
+Import this repo, build command `npm run build`, output directory `dist`, and add the two
+environment variables above.
 
 ## Database (Supabase)
 

@@ -4,7 +4,9 @@ import { supabase } from '@/lib/supabase';
 import { useReveal } from '@/hooks/useReveal';
 import { FAQS } from '@/data/content';
 
-type Status = 'idle' | 'submitting' | 'success' | 'error';
+type Status = 'idle' | 'submitting' | 'success' | 'error' | 'whatsapp';
+
+const WHATSAPP_NUMBER = '918879161429';
 
 const VISIT_OPTIONS = [
   'Overnight stay',
@@ -31,8 +33,31 @@ export function Enquiry() {
   const update = (key: string, value: string) =>
     setForm((f) => ({ ...f, [key]: value }));
 
+  const whatsappLink = () => {
+    const lines = [
+      'Hello Mist Paradise, I would like to enquire.',
+      `Name: ${form.name.trim()}`,
+      `Email: ${form.email.trim()}`,
+    ];
+    if (form.phone.trim()) lines.push(`Phone: ${form.phone.trim()}`);
+    if (form.visit_type) lines.push(`Visit: ${form.visit_type}`);
+    if (form.check_in) lines.push(`Check-in: ${form.check_in}`);
+    if (form.check_out) lines.push(`Check-out: ${form.check_out}`);
+    if (form.guests) lines.push(`Guests: ${form.guests}`);
+    if (form.message.trim()) lines.push(`Message: ${form.message.trim()}`);
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!supabase) {
+      // No database configured: hand the visitor's own details to WhatsApp.
+      window.open(whatsappLink(), '_blank', 'noopener');
+      setStatus('whatsapp');
+      return;
+    }
+
     setStatus('submitting');
 
     try {
@@ -174,7 +199,25 @@ export function Enquiry() {
                 {status === 'error' && (
                   <div className="mt-4 flex items-center gap-2 p-3 rounded-xl bg-ember-500/10 border border-ember-500/30 text-ember-400 text-sm">
                     <AlertCircle className="w-4 h-4 shrink-0" />
-                    Something went wrong. Please try again or call us directly.
+                    <span>
+                      Something went wrong. Please{' '}
+                      <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="underline">
+                        send it on WhatsApp
+                      </a>{' '}
+                      or call +91 88791 61429.
+                    </span>
+                  </div>
+                )}
+
+                {status === 'whatsapp' && (
+                  <div role="status" className="mt-4 flex items-center gap-2 p-3 rounded-xl bg-mist-500/10 border border-mist-300/30 text-ink-100 text-sm">
+                    <CheckCircle2 className="w-4 h-4 shrink-0 text-gold-300" />
+                    <span>
+                      WhatsApp has opened with your details. Press send there to reach us.{' '}
+                      <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="underline text-gold-300">
+                        Open WhatsApp again
+                      </a>
+                    </span>
                   </div>
                 )}
 

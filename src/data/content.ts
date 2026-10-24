@@ -1,5 +1,6 @@
-const RESORT_IMAGES = '/WhatsApp_Unknown_2026-10-24_at_01.24.30';
-const POOL_IMAGES = '/WhatsApp_Unknown_2026-10-24_at_01.24.26';
+const BASE = import.meta.env.BASE_URL;
+const RESORT_IMAGES = `${BASE}WhatsApp_Unknown_2026-10-24_at_01.24.30`;
+const POOL_IMAGES = `${BASE}WhatsApp_Unknown_2026-10-24_at_01.24.26`;
 
 export const IMAGES = {
   heroPool: `${POOL_IMAGES}/WhatsApp_Image_2026-10-24_at_01.22.06.jpeg`,
